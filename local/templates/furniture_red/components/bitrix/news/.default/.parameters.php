@@ -33,6 +33,14 @@ $arTemplateParameters = array(
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "N",
 	),
+	"CANONICAL_IBLOCK_ID" => Array(
+		"NAME" => GetMessage("CUSTOM_CANONICAL"),
+		"DEFAULT" => "",
+		"TYPE" => "STRING",
+		"MULTIPLE" => "N",
+		"COLS" => 25,
+		"REFRESH"=> "Y",
+	),
 );
 
 if (($arCurrentValues['USE_SHARE'] ?? 'N') === 'Y')

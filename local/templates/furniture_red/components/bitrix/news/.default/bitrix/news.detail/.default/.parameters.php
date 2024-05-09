@@ -22,5 +22,13 @@ $arTemplateParameters = array(
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "Y",
 	),
+	"CANONICAL_IBLOCK_ID" => Array(
+		"NAME" => GetMessage("CUSTOM_CANONICAL"),
+		"DEFAULT" => "",
+		"TYPE" => "STRING",
+		"MULTIPLE" => "N",
+		"COLS" => 25,
+		"REFRESH"=> "Y",
+	),
 );
 ?>

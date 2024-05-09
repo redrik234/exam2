@@ -8,5 +8,6 @@ $MESS["T_IBLOCK_DESC_NEWS_SHARE_TEMPLATE"] = "Шаблон компонента 
 $MESS["T_IBLOCK_DESC_NEWS_SHARE_SYSTEM"] = "Используемые соц. закладки и сети";
 $MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_LOGIN"] = "Логин для bit.ly";
 $MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_KEY"] = "Ключ для для bit.ly";
-$MESS ['CUSTOM_SPECIAL_DATE'] = "Установить свойство страницы specialdate";
+$MESS['CUSTOM_SPECIAL_DATE'] = "Установить свойство страницы specialdate";
+$MESS["CUSTOM_CANONICAL"] = "ID информационного блока для rel=canonical";
 ?>
