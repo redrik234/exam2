@@ -24,26 +24,28 @@ class PageHandler {
 
     public static function replaceMetaTag() {
         global $APPLICATION;
-        $metaTagORM = CIBlockElement::GetList(
-            [],
-            [
-                'IBLOCK_CODE' => self::META_TAG_IBLOCK_CODE,
-                '=NAME' => $APPLICATION->GetCurPage(),
-                'ACTIVE' => 'Y'
-            ],
-            false,
-            false,
-            [
-                'ID', 'NAME', 'PROPERTY_TITLE', 'PROPERTY_DESCRIPTION'
-            ]
-        );
-        if ($data = $metaTagORM->Fetch()) {
-            if ($data['PROPERTY_TITLE_VALUE']) {
-                $APPLICATION->SetPageProperty('title', $data['PROPERTY_TITLE_VALUE']);
-            }
-
-            if ($data['PROPERTY_DESCRIPTION_VALUE']) {
-                $APPLICATION->SetPageProperty('description', $data['PROPERTY_DESCRIPTION_VALUE']);
+        if (CModule::IncludeModule("iblock")) {
+            $metaTagORM = CIBlockElement::GetList(
+                [],
+                [
+                    'IBLOCK_CODE' => self::META_TAG_IBLOCK_CODE,
+                    '=NAME' => $APPLICATION->GetCurPage(),
+                    'ACTIVE' => 'Y'
+                ],
+                false,
+                false,
+                [
+                    'ID', 'NAME', 'PROPERTY_TITLE', 'PROPERTY_DESCRIPTION'
+                ]
+            );
+            if ($data = $metaTagORM->Fetch()) {
+                if ($data['PROPERTY_TITLE_VALUE']) {
+                    $APPLICATION->SetPageProperty('title', $data['PROPERTY_TITLE_VALUE']);
+                }
+    
+                if ($data['PROPERTY_DESCRIPTION_VALUE']) {
+                    $APPLICATION->SetPageProperty('description', $data['PROPERTY_DESCRIPTION_VALUE']);
+                }
             }
         }
     }
