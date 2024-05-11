@@ -19,5 +19,7 @@ define("BX_DIR_PERMISSIONS", 0755);
 
 define("BX_DISABLE_INDEX_PAGE", true);
 
+define("BX_COMP_MANAGED_CACHE", true);
+
 define("BX_UTF", true);
 mb_internal_encoding("UTF-8");
