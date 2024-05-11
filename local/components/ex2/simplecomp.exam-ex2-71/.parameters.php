@@ -27,5 +27,11 @@ $arComponentParameters = array(
 			"TYPE" => "CHECKBOX",
 			"DEFAULT" => "Y",
 		],
+		"ELEMENT_COUNT" => [
+			"PARENT" => "BASE",
+			"NAME" => GetMessage("SIMPLECOMP_EXAM2_ELEMENT_COUNT"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "20",
+		],
 	),
 );

@@ -12,7 +12,8 @@ $APPLICATION->SetTitle("Простой компонент ex2-71");
 		"PRODUCTS_PROP_CODE" => "FIRM",
 		"PRODUCTS_URL_TEMPLATE" => "/products/#SECTION_ID#/#ELEMENT_ID#/",
 		"COMPONENT_TEMPLATE" => ".default",
-		"CACHE_GROUPS" => "Y"
+		"CACHE_GROUPS" => "Y",
+		"ELEMENT_COUNT" => "2"
 	),
 	false
 );?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
