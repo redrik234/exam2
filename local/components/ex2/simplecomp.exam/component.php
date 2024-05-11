@@ -9,8 +9,12 @@ if(!Loader::includeModule("iblock"))
 	ShowError(GetMessage("SIMPLECOMP_EXAM2_IBLOCK_MODULE_NONE"));
 	return;
 }
+$isFilter = false;
+if (isset($_REQUEST['F'])) {
+	$isFilter = true;
+}
 
-if ($this->StartResultCache()) {
+if ($this->StartResultCache(false, [$isFilter])) {
 	if (intval($arParams["PRODUCTS_IBLOCK_ID"]) > 0
 		&& intval($arParams["NEWS_IBLOCK_ID"]) > 0
 		&& !empty($arParams['LINK_PROPERTY_CODE'])){
@@ -56,13 +60,24 @@ if ($this->StartResultCache()) {
 				$sections[] = $arSection;
 			}
 
+			$arProductFilter =	[
+				'IBLOCK_ID' => $arParams['PRODUCTS_IBLOCK_ID'],
+				'ACTIVE' => 'Y',
+				'SECTION_ID' => array_column($sections, 'ID')
+			];
+
+			if ($isFilter) {
+				$arProductFilter[] = [
+					'LOGIC' => 'OR',
+					['<=PROPERTY_PRICE' => 1700, 'PROPERTY_MATERIAL' => 'Дерево, ткань'],
+					['<PROPERTY_PRICE' => 1500, 'PROPERTY_MATERIAL' => 'Металл, пластик']
+				];
+				$this->AbortResultCache();
+			}
+
 			$productORM = CIBlockElement::GetList(
 				[],
-				[
-					'IBLOCK_ID' => $arParams['PRODUCTS_IBLOCK_ID'],
-					'ACTIVE' => 'Y',
-					'SECTION_ID' => array_column($sections, 'ID')
-				],
+				$arProductFilter,
 				false,
 				false,
 				[
@@ -94,7 +109,9 @@ if ($this->StartResultCache()) {
 				foreach ($sections as $arSection) {
 					if (in_array($arNews['ID'], $arSection[$arParams['LINK_PROPERTY_CODE']])) {
 						$item['SECTIONS'][(int)$arSection['ID']] =  $arSection['NAME'];
-						$item['PRODUCTS'] = array_merge($item['PRODUCTS'], $products[(int)$arSection['ID']]);
+						if (isset( $products[(int)$arSection['ID']])) {
+							$item['PRODUCTS'] = array_merge($item['PRODUCTS'], $products[(int)$arSection['ID']]);
+						}
 					}
 				}
 				$this->arResult['CLASSIFICATOR_DATA'][] = $item;

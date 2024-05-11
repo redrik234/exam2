@@ -1,4 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<p><?=GetMessage('SIMPLECOMP_EXAM2_CAT_FILTER');?> <a href="<?=$APPLICATION->GetCurPage() . '?F=Y';?>"><?=$APPLICATION->GetCurPage() . '?F="Y"';?></a></p>
 <p>---</p>
 <p><b><?=GetMessage("SIMPLECOMP_EXAM2_CAT_TITLE")?></b></p>
 <?if (!empty($arResult['CLASSIFICATOR_DATA'])):?>
