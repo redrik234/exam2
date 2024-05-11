@@ -14,6 +14,7 @@
                                 - <?=$arProduct['PRICE'];?> 
                                 - <?=$arProduct['MATERIAL'];?> 
                                 - <?=$arProduct['ARTNUMBER'];?>
+                                - <?=$arProduct['DETAIL_URL'];?>
                             </li>
                         <?endforeach;?>
                     </ul>

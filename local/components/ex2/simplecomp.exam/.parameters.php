@@ -14,6 +14,11 @@ $arComponentParameters = array(
 			"NAME" => GetMessage("SIMPLECOMP_EXAM2_LINK_PROPERTY_CODE"),
 			"TYPE" => "STRING",
 		),
+		"DETAIL_URL_TEMPLATE" => array(
+			"NAME" => GetMessage("SIMPLECOMP_EXAM2_DETAIL_URL_TEMPLATE"),
+			"TYPE" => "STRING",
+			"DEFAULT" => "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#"
+		),
 		"CACHE_TIME" => array("DEFAULT" => 3600)
 	),
 );
