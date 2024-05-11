@@ -108,6 +108,10 @@ if ($this->StartResultCache(false, [$isFilter])) {
 				]
 			);
 
+			$this->arResult['PRICE_RANGE'] = [
+				'MIN' => PHP_INT_MAX,
+				'MAX' => 0
+			];
 			$products = [];
 			while($arProduct = $productORM->Fetch()) {
 				++$this->arResult['ELEMENT_COUNT'];
@@ -116,6 +120,13 @@ if ($this->StartResultCache(false, [$isFilter])) {
 					$arProduct['ID'],
 					false,
 				);
+
+				if ($arProduct['PROPERTY_PRICE_VALUE'] < $arResult['PRICE_RANGE']['MIN']) {
+					$this->arResult['PRICE_RANGE']['MIN'] = $arProduct['PROPERTY_PRICE_VALUE'];
+				}
+				elseif ($arProduct['PROPERTY_PRICE_VALUE'] > $arResult['PRICE_RANGE']['MAX']) {
+					$this->arResult['PRICE_RANGE']['MAX'] = $arProduct['PROPERTY_PRICE_VALUE'];
+				}
 
 				$this->arResult['ADD_PRODUCT']['ADD_LINK'] = $controlButtons['edit']['add_element']['ACTION_URL'];
 
@@ -136,6 +147,10 @@ if ($this->StartResultCache(false, [$isFilter])) {
 				];
 			}
 
+			if ($arResult['PRICE_RANGE']['MIN'] === PHP_INT_MAX) {
+				$this->arResult['PRICE_RANGE']['MIN'] = 0;
+			}
+
 			foreach ($news as $arNews) {
 				$item = $arNews;
 				$item['SECTIONS'] = [];
@@ -151,7 +166,7 @@ if ($this->StartResultCache(false, [$isFilter])) {
 				$this->arResult['CLASSIFICATOR_DATA'][] = $item;
 			}
 
-			$this->SetResultCacheKeys(['ELEMENT_COUNT']);
+			$this->SetResultCacheKeys(['ELEMENT_COUNT', 'PRICE_RANGE']);
 	}
 	else {
 		$this->AbortResultCache();
