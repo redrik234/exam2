@@ -3,14 +3,37 @@
 <p>---</p>
 <p><b><?=GetMessage("SIMPLECOMP_EXAM2_CAT_TITLE")?></b></p>
 <?if (!empty($arResult['CLASSIFICATOR_DATA'])):?>
-    <ul>
+    <?
+        $this->AddEditAction(
+            'add-news', 
+            $arResult['ADD_NEWS']['ADD_LINK'], 
+            CIBlock::GetArrayByID($arResult['ADD_NEWS']["IBLOCK_ID"], "ELEMENT_ADD")
+        );
+    ?>
+    <ul id="<?=$this->GetEditAreaId('add-news');?>">
         <?foreach($arResult['CLASSIFICATOR_DATA'] as $item):?>
-            <li>
+            <?
+                $this->AddEditAction($item['ID'], $item['EDIT_LINK'], CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_EDIT"));
+                $this->AddDeleteAction($item['ID'], $item['DELETE_LINK'], CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+            ?>
+            <li id="<?=$this->GetEditAreaId($item['ID']);?>">
                 <b><?=$item['NAME'];?></b> - <?=$item['ACTIVE_FROM'];?> (<?=implode(', ', $item['SECTIONS']);?>)
                 <?if (!empty($item['PRODUCTS'])):?>
-                    <ul>
+                    <?
+                        $htmlId = 'add-product' . uniqid();
+                        $this->AddEditAction(
+                            $htmlId, 
+                            $arResult['ADD_PRODUCT']['ADD_LINK'], 
+                            CIBlock::GetArrayByID($arResult['ADD_PRODUCT']["IBLOCK_ID"], "ELEMENT_ADD")
+                        );
+                    ?>
+                    <ul id="<?=$this->GetEditAreaId($htmlId);?>">
                         <?foreach($item['PRODUCTS'] as $arProduct):?>
-                            <li>
+                            <?
+                                $this->AddEditAction($item['ID'] . '-' . $arProduct['ID'], $arProduct['EDIT_LINK'], CIBlock::GetArrayByID($arProduct["IBLOCK_ID"], "ELEMENT_EDIT"));
+                                $this->AddDeleteAction($item['ID'] . '-' . $arProduct['ID'], $arProduct['DELETE_LINK'], CIBlock::GetArrayByID($arProduct["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+                            ?>
+                            <li id="<?=$this->GetEditAreaId($item['ID'] . '-' . $arProduct['ID']);?>">
                                 <?=$arProduct['NAME'];?> 
                                 - <?=$arProduct['PRICE'];?> 
                                 - <?=$arProduct['MATERIAL'];?> 
