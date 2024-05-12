@@ -36,7 +36,8 @@
 		"ELEMENT_ID" => $arResult["VARIABLES"]["ELEMENT_ID"],
 		"ELEMENT_CODE" => $arResult["VARIABLES"]["ELEMENT_CODE"],
 		"IBLOCK_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"],
-		"CANONICAL_IBLOCK_ID" => $arParams['CANONICAL_IBLOCK_ID']
+		"CANONICAL_IBLOCK_ID" => $arParams['CANONICAL_IBLOCK_ID'],
+		"AJAX_NEWS_REPORT" => $arParams['AJAX_NEWS_REPORT']
 	),
 	$component
 );?>

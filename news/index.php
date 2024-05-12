@@ -93,6 +93,7 @@ $APPLICATION->SetTitle("Новости");
 		"SPECIAL_DATE" => "Y",
 		"CANONICAL" => "5",
 		"CANONICAL_IBLOCK_ID" => "5",
+		"AJAX_NEWS_REPORT" => "N",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",

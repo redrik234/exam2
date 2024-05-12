@@ -30,5 +30,10 @@ $arTemplateParameters = array(
 		"COLS" => 25,
 		"REFRESH"=> "Y",
 	),
+	"AJAX_NEWS_REPORT" => Array(
+		"NAME" => GetMessage("CUSTOM_AJAX_NEWS_REPORT"),
+		"TYPE" => "CHECKBOX",
+		"DEFAULT" => "N",
+	)
 );
 ?>
