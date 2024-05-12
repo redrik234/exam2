@@ -69,6 +69,8 @@ $arComponentParameters = array(
 		"VARIABLE_ALIASES" => Array(
 			"SECTION_ID" => Array("NAME" => GetMessage("SECTION_ID_DESC")),
 			"ELEMENT_ID" => Array("NAME" => GetMessage("ELEMENT_ID_DESC")),
+			"PARAM1" => Array("NAME" => GetMessage("PARAM1")),
+			"PARAM2" => Array("NAME" => GetMessage("PARAM2")),
 				
 			//Добавили переменные
 			//"PARAM1" => Array("NAME" => GetMessage("PARAM1")),
@@ -93,6 +95,11 @@ $arComponentParameters = array(
 				"NAME" => GetMessage("DETAIL_PAGE"),
 				"DEFAULT" => "#SECTION_ID#/#ELEMENT_ID#/",
 				"VARIABLES" => array("ELEMENT_ID", "SECTION_ID"),
+			),
+			"exampage" => array(
+					"NAME" => GetMessage("EXAM_PAGE"),
+					'DEFAULT' => "exam/new/#PARAM1#/?PARAM2=#PARAM2#",
+					'VARIABLES' => array("PARAM1", "PARAM2")
 			),
 				
 			//добавили новую страницу

@@ -6,7 +6,7 @@ $arComponentDescription = array(
 	"ICON" => "/images/photo.gif",
 	"COMPLEX" => "Y",
 	"PATH" => array(
-		"ID" => "exam2",
+		"ID" => "ex2",
 		"NAME" => GetMessage("IBLOCK_PHOTO_SECTION"),
 	),
 );
