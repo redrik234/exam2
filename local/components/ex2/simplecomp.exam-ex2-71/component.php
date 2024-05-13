@@ -4,6 +4,8 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 use Bitrix\Main\Loader,
 	Bitrix\Iblock;
 
+global $CACHE_MANAGER;
+
 if(!Loader::includeModule("iblock"))
 {
 	ShowError(GetMessage("SIMPLECOMP_EXAM2_IBLOCK_MODULE_NONE"));
@@ -21,7 +23,7 @@ if (!empty($arParams['ELEMENT_COUNT'])) {
 }
 
 if ($this->StartResultCache(false, [$USER->GetGroups(), $arNavigation])) {
-
+	$CACHE_MANAGER->RegisterTag('iblock_id_3');
 	if (
 		intval($arParams['PRODUCTS_IBLOCK_ID']) > 0
 		&& intval($arParams['CLASSIFICATOR_IBLOCK_ID']) > 0
