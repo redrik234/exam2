@@ -9,8 +9,18 @@ if(!Loader::includeModule("iblock"))
 	ShowError(GetMessage("SIMPLECOMP_EXAM2_IBLOCK_MODULE_NONE"));
 	return;
 }
+$arNavigation = false;
+if (!empty($arParams['ELEMENT_COUNT'])) {
+	$arNavParams = array(
+		"nPageSize" => $arParams["ELEMENT_COUNT"],
+		"bDescPageNumbering" => '',
+		"bShowAll" => 'Y',
+	); 
 
-if ($this->StartResultCache(false, $USER->GetGroups())) {
+	$arNavigation = CDBResult::GetNavParams($arNavParams);
+}
+
+if ($this->StartResultCache(false, [$USER->GetGroups(), $arNavigation])) {
 
 	if (
 		intval($arParams['PRODUCTS_IBLOCK_ID']) > 0
@@ -31,11 +41,12 @@ if ($this->StartResultCache(false, $USER->GetGroups())) {
 				'CHECK_PERMISSIONS' => $arParams['CACHE_GROUPS']
 			],
 			false,
-			false,
+			$arNavParams,
 			[
 				'ID', 'NAME'
 			]
 		);
+		$this->arResult['NAV_STRING'] = $firmORM->GetPageNavString(GetMessage('SIMPLECOMP_EXAM2_NAV_DESC'));
 
 		$firms = [];
 		while ($arFirm = $firmORM->Fetch()) {
@@ -67,7 +78,7 @@ if ($this->StartResultCache(false, $USER->GetGroups())) {
 					'PROPERTY_ARTNUMBER'
 				]
 			);
-	
+
 			$this->arResult['CLASSIFICATOR_DATA'] = $firms;
 			while ($arProduct = $productORM->Fetch()) {
 				$this->arResult['CLASSIFICATOR_DATA'][$arProduct['PROPERTY_' . $arParams['PRODUCTS_PROP_CODE'] . '_VALUE']]['PRODUCTS'][] = [

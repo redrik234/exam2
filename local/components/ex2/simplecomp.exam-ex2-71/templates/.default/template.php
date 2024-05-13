@@ -22,4 +22,9 @@
             </li>
         <?endforeach;?>
     </ul>
+    <?if(!empty($arResult["NAV_STRING"])):?>
+        ---
+        <p><b><?=GetMessage('SIMPLECOMP_EXAM2_NAV_TITLE');?></b></p>
+        <?=$arResult["NAV_STRING"]?>
+    <?endif;?>
 <?endif;?>
