@@ -14,6 +14,18 @@ if (isset($_REQUEST['F'])) {
 	$isFilter = true;
 }
 
+if ($USER->IsAuthorized() && intval($arParams["PRODUCTS_IBLOCK_ID"]) > 0) {
+	$buttons = CIBlock::GetPanelButtons($arParams["PRODUCTS_IBLOCK_ID"]);
+	
+	$this->AddIncludeAreaIcon(
+		[
+			'URL'   => $buttons['submenu']['element_list']['ACTION_URL'],
+			'TITLE' => GetMessage('SIMPLECOMP_EXAM2_PARAMS_MENU_IBLOCK_BUTTON'),
+			'IN_PARAMS_MENU' => 'Y'
+		]
+	);
+}
+
 if ($this->StartResultCache(false, [$isFilter])) {
 	if (intval($arParams["PRODUCTS_IBLOCK_ID"]) > 0
 		&& intval($arParams["NEWS_IBLOCK_ID"]) > 0
@@ -106,7 +118,7 @@ if ($this->StartResultCache(false, [$isFilter])) {
 				);
 
 				$this->arResult['ADD_PRODUCT']['ADD_LINK'] = $controlButtons['edit']['add_element']['ACTION_URL'];
-				
+
 				$products[(int)$arProduct['IBLOCK_SECTION_ID']][] = [
 					'ID' => $arProduct['ID'],
 					'NAME' => $arProduct['NAME'],
