@@ -1,4 +1,23 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+
+<?
+if ($arParams['AJAX_NEWS_REPORT'] === 'Y') {
+	$href = [
+		'IS_AJAX' => 'Y',
+		'LINK' => 'href="#"',
+		'ONCLICK' => 'onclick="ajaxReport(\'' . $APPLICATION->GetCurPage() . '\')"'
+	];
+}
+else {
+	$href = [
+		'IS_AJAX' => 'N',
+		'LINK' => 'href="' . $APPLICATION->GetCurPage() . '?R=Y"',
+		'ONCLICK' => ''
+	];
+}
+
+?>
+
 <div class="news-detail">
 	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
 		<img class="detail_picture" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="<?=$arResult["DETAIL_PICTURE"]["WIDTH"]?>" height="<?=$arResult["DETAIL_PICTURE"]["HEIGHT"]?>" alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
@@ -9,6 +28,11 @@
 	<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
 		<h3><?=$arResult["NAME"]?></h3>
 	<?endif;?>
+	<p>
+		<p id="report-msg">
+		</p>
+		<a <?=($href['IS_AJAX'] === 'Y' ? $href['ONCLICK'] . ' ' . $href['LINK'] : $href['LINK']);?>><?=GetMessage('REPORT');?></a>
+	</p>
 	<div class="news-detail">
 	<?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arResult["FIELDS"]["PREVIEW_TEXT"]):?>
 		<p><?=$arResult["FIELDS"]["PREVIEW_TEXT"];unset($arResult["FIELDS"]["PREVIEW_TEXT"]);?></p>
