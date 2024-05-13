@@ -37,7 +37,8 @@ if ($this->StartResultCache()) {
 
 			$sectionORM = CIBlockSection::GetList(
 				[
-					"NAME" => "ASC"
+					"NAME" => "ASC",
+					"SORT" => "ASC"
 				],
 				[
 					'IBLOCK_ID' =>	$arParams['PRODUCTS_IBLOCK_ID'],
@@ -65,7 +66,7 @@ if ($this->StartResultCache()) {
 				false,
 				false,
 				[
-					'ID', 'NAME', 'IBLOCK_SECTION_ID', 'PROPERTY_ARTNUMBER', 'PROPERTY_MATERIAL', 'PROPERTY_PRICE'
+					'ID', 'NAME', 'CODE', 'IBLOCK_SECTION_ID', 'PROPERTY_ARTNUMBER', 'PROPERTY_MATERIAL', 'PROPERTY_PRICE'
 				]
 			);
 
@@ -78,6 +79,11 @@ if ($this->StartResultCache()) {
 					'PRICE' => $arProduct['PROPERTY_PRICE_VALUE'],
 					'MATERIAL' => $arProduct['PROPERTY_MATERIAL_VALUE'],
 					'ARTNUMBER' => $arProduct['PROPERTY_ARTNUMBER_VALUE'],
+					'DETAIL_URL' => str_replace(
+						['#SECTION_ID#', '#ELEMENT_CODE#'],
+						[$arProduct['IBLOCK_SECTION_ID'], $arProduct['CODE']], 
+						$arParams['DETAIL_URL_TEMPLATE']
+					)
 				];
 			}
 

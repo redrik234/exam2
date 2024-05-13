@@ -10,7 +10,8 @@ $APPLICATION->SetTitle("Простой компонент");
 		"LINK_PROPERTY_CODE" => "UF_NEWS_LINK",
 		"NEWS_IBLOCK_ID" => "1",
 		"PRODUCTS_IBLOCK_ID" => "2",
-		"COMPONENT_TEMPLATE" => ".default"
+		"COMPONENT_TEMPLATE" => ".default",
+		"DETAIL_URL_TEMPLATE" => "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#"
 	),
 	false
 );?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
